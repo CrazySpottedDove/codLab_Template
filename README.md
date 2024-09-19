@@ -1,3 +1,5 @@
+# 是什么
+计算机组成课程实验报告的LaTeX模板。
 # 使用
 将tex文件与cls文件置于同一目录下。保证titlepage文件夹与tex文件居同一目录，或者titlepage文件夹与tex文件的上级目录同级。具体使用说明可见document.tex。
 # 支持的内容
