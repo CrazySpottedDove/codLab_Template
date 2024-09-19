@@ -1,0 +1,61 @@
+\documentclass{codLab}
+\usepackage{listings}
+\begin{document}
+	\firsttitlepage{姓名}{学号}{学院}{专业}{任课教师}{报告日期}
+	\secondtitlepage{实验项目名称}{学生姓名}{学号}{紫金港东四509室}{2024}{12}{13}
+	\section{操作方法与实验步骤}
+	本节重点介绍实验的具体过程，包括：代码设计层次结构图及说明、源代码（包括注释）、PC机上进行的关键步骤截图及说明、调试过程等，这部分的内容应当与实际操作过程和结果相符。本节也可以再细分小节，要求同上。
+	
+	代码示例：
+	
+\begin{lstlisting}[caption=xdc代码,language=xdc]
+	# LE即总开关
+	set_property PACKAGE_PIN AA10 [get_ports LE]  
+	set_property IOSTANDARD LVCMOS15 [get_ports LE]  
+	
+	# buzzer_on是蜂鸣器  
+	set_property PACKAGE_PIN AF25 [get_ports buzzer_on]  
+	set_property IOSTANDARD LVCMOS33 [get_ports buzzer_on]
+	
+	# clk_origin是频率为100MHz的板载时钟  
+	set_property PACKAGE_PIN AC18 [get_ports clk_origin]  
+	set_property IOSTANDARD LVCMOS18 [get_ports clk_origin]  
+	create_clock -period 10.000 -name clk [get_ports "clk_origin"]
+	
+\end{lstlisting}
+\begin{lstlisting}[title=verilog代码,language=verilog]
+	module Beat_Show(
+		input wire clk_origin,
+		//系统时钟信号
+		input wire clk,
+		//经过速度选择后选择的时钟频率
+		input wire LE_PAUSE,
+		//总控使能信号，控制整个模块的启动与否
+		output wire LED_CLK,
+		output wire LED_CLR,
+		output wire LED_DO,
+		output wire LED_EN,
+		//将LED驱动的结果输出给实验板上的LED板块，控制LED灯的状态
+		output wire[1:0]led,
+		output wire LED2
+		//控制指示灯的亮灭，指示此刻是否按下按钮
+	);
+\end{lstlisting}
+	\section{实验结果与分析}
+	1.这里应给出详实的实验结果。分析应有条理，要求采用规范的书面语。
+	2.实验四后每个实验都需要做模拟，要到每一个模拟结果的每一段结果做分析说明。
+	3.对下载到NEXYS实验台的图片结果做分析说明。
+	4.原则上要求使用图片与文字结合的形式说明，因为word和PDF文档不支持视频，所以请不要使用视频文件。
+	5.图片请在垂直方向，不要横向。不要用很大的图片，请先做裁剪操作。
+	图片命令示例：
+	\begin{singlefigure}[标题]{浙江大学}
+		这是一些居中排版的对图片的注释。
+	\end{singlefigure}
+	图片命令拥有第二个可选参数，用于控制图片的长度，默认为0.7总长。
+	\begin{singlefigure}[控制为0.5总长]{浙江大学}[0.5]
+		第二个可选参数填0.5.
+	\end{singlefigure}
+	\section{讨论、心得}
+	简要地叙述一下实验过程中的感受，以及其他的问题描述和自己的感想。特别是实验中遇到的困难，最后如何解决的。在用verilog代码写程序时遇到语法或其他错误，如何修改解决的。
+
+\end{document}
